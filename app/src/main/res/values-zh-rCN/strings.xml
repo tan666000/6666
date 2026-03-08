@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WJFakeLocation</string>
+    
+    <!-- 通用 -->
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="add">添加</string>
+    <string name="confirm">确认</string>
+    <string name="loading">加载中…</string>
+    <string name="error">错误</string>
+    <string name="success">成功</string>
+    <string name="warning">警告</string>
+    
+    <!-- 导航 -->
+    <string name="nav_map">地图</string>
+    <string name="nav_favorites">收藏</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_about">关于</string>
+    
+    <!-- 地图界面 -->
+    <string name="map_search_hint">搜索地点名称或地址</string>
+    <string name="map_current_location">当前位置</string>
+    <string name="map_select_location">选择位置</string>
+    <string name="map_add_favorite">添加到收藏</string>
+    <string name="map_go_to_point">前往此位置</string>
+    
+    <!-- 收藏夹 -->
+    <string name="favorites_title">我的收藏</string>
+    <string name="favorites_empty">暂无收藏位置</string>
+    <string name="favorites_add">添加收藏</string>
+    <string name="favorites_edit">编辑收藏</string>
+    <string name="favorites_delete_confirm">确定要删除此收藏吗？</string>
+    
+    <!-- 设置 -->
+    <string name="settings_title">设置</string>
+    <string name="settings_general">常规设置</string>
+    <string name="settings_location">定位设置</string>
+    <string name="settings_advanced">高级设置</string>
+    <string name="settings_api_key">API Key 配置</string>
+    
+    <string name="settings_use_accuracy">使用自定义精度</string>
+    <string name="settings_accuracy_value">精度值（米）</string>
+    <string name="settings_use_altitude">使用自定义海拔</string>
+    <string name="settings_altitude_value">海拔值（米）</string>
+    <string name="settings_use_randomize">随机偏移</string>
+    <string name="settings_randomize_radius">偏移半径（米）</string>
+    <string name="settings_use_speed">使用自定义速度</string>
+    <string name="settings_speed_value">速度值（米/秒）</string>
+    
+    <!-- API Key 设置 -->
+    <string name="api_key_title">基站/WiFi 数据 API 配置</string>
+    <string name="api_key_juhe">聚合数据 API Key</string>
+    <string name="api_key_input_hint">请输入您的 API Key</string>
+    <string name="api_key_save">保存 API Key</string>
+    <string name="api_key_warning">警告：使用基站/WiFi 定位功能可能涉及隐私风险和额外费用。请确保您了解相关风险后再启用此功能。</string>
+    <string name="api_key_guide">如何获取 API Key：</string>
+    <string name="api_key_guide_1">1. 访问聚合数据官网 (juhe.cn)</string>
+    <string name="api_key_guide_2">2. 注册并登录账号</string>
+    <string name="api_key_guide_3">3. 找到"基站/WiFi 定位 API"服务</string>
+    <string name="api_key_guide_4">4. 申请开通并获取 API Key</string>
+    <string name="api_key_guide_5">5. 将 API Key 填入上方输入框</string>
+    
+    <!-- 状态提示 -->
+    <string name="status_xposed_not_active">Xposed 模块未激活，请先在 LSPosed 中启用本模块</string>
+    <string name="status_playing">正在运行</string>
+    <string name="status_stopped">已停止</string>
+    
+    <!-- 权限请求 -->
+    <string name="permission_required">需要权限</string>
+    <string name="permission_location_rationale">需要位置权限才能选择地图位置</string>
+    <string name="permission_notification_rationale">Android 13+ 需要通知权限以显示后台运行状态</string>
+    
+    <!-- 关于 -->
+    <string name="about_title">关于</string>
+    <string name="about_version">版本</string>
+    <string name="about_description">WJFakeLocation 是一个强大的 Xposed 虚拟定位工具，支持 Android 13-16。</string>
+</resources>
