@@ -220,9 +220,9 @@ ktlint {
 detekt {
     toolVersion = "1.23.4"
     config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig.set(true)
-    allRules.set(false)
-    ignoreFailures.set(false)
+    buildUponDefaultConfig = true
+    allRules = false
+    ignoreFailures = false
     source.setFrom(
         files("$projectDir/src/main/java",
               "$projectDir/src/main/kotlin",
@@ -230,13 +230,6 @@ detekt {
               "$projectDir/src/test/kotlin")
     )
     baseline = file("$projectDir/detekt-baseline.xml")
-    
-    reports {
-        html.enabled.set(true)
-        xml.enabled.set(true)
-        txt.enabled.set(true)
-        sarif.enabled.set(true)
-    }
 }
 
 // 创建综合质量检查任务
