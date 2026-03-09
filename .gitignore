@@ -11,6 +11,10 @@ local.properties
 # Room Database Schemas (可选保留)
 schemas/
 
+# ==================== 应用 libs 目录（保留 SDK JAR） ====================
+# 不忽略 app/libs 中的 JAR 文件（地图 SDK 等第三方库）
+!app/libs/*.jar
+
 # ==================== 签名密钥库 ====================
 *.jks
 *.keystore

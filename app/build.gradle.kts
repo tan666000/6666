@@ -108,15 +108,16 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.datastore.preferences.core)
     
-    // AMap (高德地图)
+    // AMap (高德地图) - Maven 依赖
     implementation(libs.amap.search)
     implementation(libs.amap.location)
     implementation(libs.amap.map)
     
-    // Baidu Map (百度地图)
-    implementation("com.baidu.lbsyun:BaiduMapSDK_Map:7.5.4")
-    implementation("com.baidu.lbsyun:BaiduMapSDK_Search:7.5.4")
-    implementation("com.baidu.lbsyun:BaiduMapSDK_Location:7.5.4")
+    // Baidu Map (百度地图) - Maven 依赖（通过 JitPack）
+    implementation("com.github.baidu.lbsyun:BaiduMapSDK_Base:7.5.4")
+    implementation("com.github.baidu.lbsyun:BaiduMapSDK_Search:7.5.4")
+    implementation("com.github.baidu.lbsyun:BaiduMapSDK_Map:7.5.4")
+    implementation("com.github.baidu.lbsyun:BaiduMapSDK_Location:7.5.4")
     
     // Supabase (云同步后端)
     implementation(platform("io.github.jan-tennert.supabase:bom:2.0.0"))
