@@ -5,6 +5,7 @@ import android.app.Application
 import com.amap.api.maps2d.AMapInterface
 import com.amap.api.services.core.ServiceSettings
 import com.baidu.mapapi.SDKInitializer
+import com.steadywj.wjfakelocation.common.WJLogger
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -17,11 +18,17 @@ class WJFakeLocationApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         
+        // 初始化日志系统
+        WJLogger.init()
+        WJLogger.d("WJFakeLocation 应用启动")
+        
         // 初始化高德地图 SDK（预加载以提升性能）
         initAMapSDK()
         
         // 初始化百度地图 SDK（多地图引擎支持）
         initBaiduMapSDK()
+        
+        WJLogger.i("应用初始化完成")
     }
     
     /**
@@ -36,13 +43,9 @@ class WJFakeLocationApplication : Application() {
             // 预加载地图接口（可选，根据实际需求）
             AMapInterface.getInstance(this)
             
-            // 注意：API Key 需要在 AndroidManifest.xml 中配置
-            // <meta-data
-            //     android:name="com.amap.api.v2.apikey"
-            //     android:value="你的_API_KEY"/>
+            WJLogger.d("高德地图 SDK 初始化成功")
         } catch (e: Exception) {
-            // 忽略初始化异常，SDK 会在首次使用时自动初始化
-            // 可以在这里添加日志记录
+            WJLogger.e(e, "高德地图 SDK 初始化失败")
         }
     }
     
@@ -55,12 +58,9 @@ class WJFakeLocationApplication : Application() {
             // 初始化百度地图 SDK
             SDKInitializer.initialize(this)
             
-            // 注意：API Key 需要在 AndroidManifest.xml 中配置
-            // <meta-data
-            //     android:name="com.baidu.lbsyun.API_KEY"
-            //     android:value="你的_API_KEY"/>
+            WJLogger.d("百度地图 SDK 初始化成功")
         } catch (e: Exception) {
-            // 忽略初始化异常
+            WJLogger.e(e, "百度地图 SDK 初始化失败")
         }
     }
 }

@@ -6,6 +6,7 @@ import android.content.Context
 import android.widget.Toast
 import com.steadywj.wjfakelocation.data.MANAGER_APP_PACKAGE_NAME
 import com.steadywj.wjfakelocation.xposed.hooks.LocationApiHooks
+import com.steadywj.wjfakelocation.xposed.hooks.SystemServicesHooks
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
@@ -18,6 +19,7 @@ class MainHook : IXposedHookLoadPackage {
     lateinit var context: Context
 
     private var locationApiHooks: LocationApiHooks? = null
+    private var systemServicesHooks: SystemServicesHooks? = null
 
     override fun handleLoadPackage(lpparam: LoadPackageParam) {
         // 避免 hook 自身应用导致递归
@@ -28,7 +30,7 @@ class MainHook : IXposedHookLoadPackage {
 
         // 在 android 进程中 hook 系统服务
         if (lpparam.packageName == "android") {
-            // TODO: 实现 SystemServicesHooks
+            systemServicesHooks = SystemServicesHooks(lpparam).also { it.initHooks() }
             XposedBridge.log("$tag System services hook initialized")
         }
 
