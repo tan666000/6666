@@ -7,6 +7,10 @@ plugins {
     alias(libs.plugins.room)
     id("jacoco") // 代码覆盖率
     kotlin("kapt") // Kotlin 注解处理
+    
+    // 应用代码质量插件
+    id("org.jlleitschuh.gradle.ktlint")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 // Room 数据库配置
@@ -58,6 +62,8 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+        // Kapt 兼容性：使用 Kotlin 1.9 语言版本
+        languageVersion = "1.9"
     }
     buildFeatures {
         compose = true
@@ -130,8 +136,16 @@ dependencies {
     implementation(libs.hiddenapibypass)
     implementation(libs.security.crypto)
     
+    // Timber - 统一日志管理
+    implementation("com.jakewharton.timber:timber:5.0.1")
+    
     // Test
     testImplementation(libs.junit)
+    testImplementation("org.mockito:mockito-core:5.8.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    testImplementation("app.cash.turbine:turbine:1.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -170,7 +184,7 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         "**/*_Factory.*",
         "**/*_MembersInjector.*",
         "**/*_Impl*.*",
-        "**/*Module*.*"
+        "**/*Module.*"
     )
     
     val kotlinClassesDir = layout.buildDirectory.dir("tmp/kotlin-classes/debug").get()
@@ -189,4 +203,46 @@ tasks.register<JacocoReport>("jacocoTestReport") {
             "includes" to listOf("outputs/unit_test_code_coverage/**/*.exec", "jacoco/test.exec")
         ))
     )
+}
+
+// ==================== Ktlint 代码风格检查配置 ====================
+ktlint {
+    version.set("1.0.1")
+    outputToConsole.set(true)
+    ignoreFailures.set(false)
+    enableExperimentalRules.set(true)
+    filter {
+        exclude { element -> element.file.path.contains("generated/") }
+        exclude { element -> element.file.path.contains("build/") }
+    }
+}
+
+// ==================== Detekt 静态代码分析配置 ====================
+detekt {
+    toolVersion = "1.23.4"
+    config.setFrom(files("$rootDir/detekt.yml"))
+    buildUponDefaultConfig.set(true)
+    allRules.set(false)
+    ignoreFailures.set(false)
+    source.setFrom(
+        files("$projectDir/src/main/java",
+              "$projectDir/src/main/kotlin",
+              "$projectDir/src/test/java",
+              "$projectDir/src/test/kotlin")
+    )
+    baseline = file("$projectDir/detekt-baseline.xml")
+    
+    reports {
+        html.enabled.set(true)
+        xml.enabled.set(true)
+        txt.enabled.set(true)
+        sarif.enabled.set(true)
+    }
+}
+
+// 创建综合质量检查任务
+tasks.register("codeQualityCheck") {
+    group = "verification"
+    description = "Run all code quality checks (ktlint + detekt)"
+    dependsOn("ktlintCheck", "detekt")
 }
