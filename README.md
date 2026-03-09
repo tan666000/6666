@@ -121,7 +121,7 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 | **依赖注入** | Hilt | 2.51.1 |
 | **数据库** | Room | 2.6.1 |
 | **网络请求** | Retrofit + OkHttp | 2.11.0 + 4.12.0 |
-| **地图 SDK** | 高德地图 + 百度地图 | 21.0.0 + 7.5.4 |
+| **地图 SDK** | 高德地图 + 百度地图 | v2026.03.06 + v7.5.4 |
 | **云同步** | Supabase | 2.0.0 |
 | **Xposed** | LSPosed API | 9028 |
 | **序列化** | Kotlinx Serialization | 1.7.1 |
@@ -148,8 +148,29 @@ adb install WJFakeLocation-v2.0.0.apk
 # 方式 B: 自行编译
 git clone https://github.com/yourusername/WJFakeLocation.git
 cd WJFakeLocation
+
+# ⚠️ 首次编译前必须下载地图 SDK JAR
+# 详见下方说明
 ./gradlew assembleDebug
 ```
+
+📦 **地图 SDK 下载指引**
+
+由于高德和百度地图 SDK 不在公共 Maven 仓库，需要手动下载 JAR 文件：
+
+**高德地图 SDK** (v2026.03.06 最新版):
+1. 访问：https://lbs.amap.com/api/android-sdk/download
+2. 下载 "Android 地图 SDK"
+3. 将以下 JAR 复制到 `app/libs/` 目录：
+   - `AMap3DMap_11.1.000_AMapSearch_9.7.4_AMapLocation_11.1.000_20260306.jar`
+   - （这是一个合并包，包含 3D 地图、搜索、定位功能）
+
+**百度地图 SDK** (v7.5.4):
+1. 访问：https://lbsyun.baidu.com/index.php?title=androidsdk/sdkanddev-download
+2. 下载 "百度地图 Android SDK"
+3. 解压后将 `BaiduLBS_Android.jar` 复制到 `app/libs/` 目录
+
+完成后运行 `./gradlew assembleDebug` 即可编译。
 
 #### Step 2: 激活模块
 1. 打开 **LSPosed** 管理器
@@ -487,7 +508,7 @@ MIT License - 详见 [LICENSE](LICENSE)
 
 | 版本 | 日期 | 状态 | 亮点 |
 |------|------|------|------|
-| **v2.0.0** | 2026-03-09 | 🎉 完全体 | 多地图 + 云同步 + 离线地图 |
+| **v2.0.0** | 2026-03-09 | 🎉 完全体 | 多地图 + 云同步 + 离线地图 + CI/CD |
 | **v1.5.0** | 2026-03-08 | ✅ 企业版 | 基站/WiFi 伪造 |
 | **v1.3.0** | 2026-03-07 | ✅ 优化版 | Clean Architecture |
 | **v1.0.0** | 2026-03-06 | 🎯 初始版 | 基础定位伪造 |
