@@ -7,7 +7,7 @@ import org.junit.Test
 
 /**
  * LocationUtil 单元测试
- * 测试定位工具类的功能
+ * 测试定位工具类的功
  */
 class LocationUtilTest {
 
